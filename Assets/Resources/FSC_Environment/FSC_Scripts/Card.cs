@@ -8,6 +8,9 @@ namespace FSC_Environment
     /// </summary>
     public class Card
     {
+        // The path to the folder in Resources that contains the card sprites.
+        const string SPRITE_PATH = "FSC_Environment/FSC_CardSprites";
+
         /// <summary>
         /// The card's value.
         /// </summary>
@@ -230,17 +233,17 @@ namespace FSC_Environment
         {
             // For whatever reason, Resources.Load seems to work best for loading sprites when you both
             // specify the type as <Sprite> AND also cast it as Sprite
-            var tex = Resources.Load<Sprite>($"FSC_Environment/FSC_CardSprites/{cardAbbr}") as Sprite;
+            var tex = Resources.Load<Sprite>($"{SPRITE_PATH}/{cardAbbr}") as Sprite;
 
             // Best-case scenario: we don't have a texture for this card - maybe it's a 15 of Michaels or something.
-            if (tex == null) { tex = Resources.Load<Sprite>($"FSC_Environment/FSC_CardSprites/BLANK") as Sprite; }
+            if (tex == null) { tex = Resources.Load<Sprite>($"{SPRITE_PATH}/BLANK") as Sprite; }
 
             // Worst-case scenario: we can't even find a placeholder texture to return!
             if (tex == null)
             {
                 throw new UnityException(
                     $"Can't find BLANK.png in CardSprites! " +
-                    "Is Assets/Resources/FSC_Environment/FSC_CardSprites a valid path?"
+                    $"Is {SPRITE_PATH} a valid path?"
                 );
             }
 
